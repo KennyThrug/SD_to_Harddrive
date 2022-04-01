@@ -1,14 +1,20 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
-def setupLights():
-    GPIO.setwarnings(False)
-    GPIO.setMode(GPIO.BOARD)
-    GPIO.setup(8,GPIO.OUT,initial=GPIO.LOW)
+numGP = 3
 
-def blinkLights(numSeconds):
-    while True:
-        GPIO.output(8,GPIO.HIGH)
+def setupLights():
+    global numGP
+    print(numGP)
+    #GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(numGP,GPIO.OUT)
+    while(True):
+        GPIO.output(numGP,1)
         sleep(1)
-        GPIO.output(8,GPIO.LOW)
+        print("on")
+        GPIO.output(numGP,0)
         sleep(1)
+        print("off")
+
+setupLights()
