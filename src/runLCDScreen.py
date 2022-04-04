@@ -20,5 +20,5 @@ from time import sleep
 
 def setupScreen():
     #GPIO.setmode(GPIO.BCM)
-    lcd = CharLCD(numbering_mode=GPIO.BOARD,cols=16,rows=2,pin_rs=33,pin_e=31,pins_data=[29,35,37,16,32,36,38,40],auto_linebreaks=True,backlight_enabled=True)
+    lcd = CharLCD(numbering_mode=GPIO.BCM,cols=16,rows=2,pin_rs=13,pin_e=6,pins_data=[19,26,23,12,16,20,21],auto_linebreaks=True,backlight_enabled=True)
     lcd.write_string(u'Hi Gabe\r\nLCD screens suck')
