@@ -1,7 +1,12 @@
 import moveFiles
-import runLCDScreen
+import runGPIO
 import blinkLights
 import os
+
 if __name__ == '__main__':
-    #blinkLights.blinkLights(3,24)
-    runLCDScreen.setupScreen()
+    runGPIO.setupButton(24)
+    while True:
+        if runGPIO.checkForButton(24):
+            runGPIO.writeString("Secret Message")
+        else:
+            runGPIO.writeString("Press The Button\r\nOr Don't")
