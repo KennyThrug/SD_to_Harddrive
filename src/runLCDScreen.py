@@ -16,8 +16,9 @@
 
 from RPLCD import CharLCD
 import RPi.GPIO as GPIO
+from time import sleep
 
 def setupScreen():
-    GPIO.setmode(GPIO.BCM)
-    lcd = CharLCD(cols=16,rows=2,pin_rs=13,pin_e=6,pins_data=[5,19,26,23,12,16,20,21])
-    lcd.write_string(u'Hello world')
+    #GPIO.setmode(GPIO.BCM)
+    lcd = CharLCD(numbering_mode=GPIO.BOARD,cols=16,rows=2,pin_rs=33,pin_e=31,pins_data=[29,35,37,16,32,36,38,40],auto_linebreaks=True,backlight_enabled=True)
+    lcd.write_string(u'Hi Gabe\r\nLCD screens suck')

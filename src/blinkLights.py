@@ -11,12 +11,13 @@ def blinkLights(numGP,numButton):
 
     while(True):
         if GPIO.input(numButton) == GPIO.HIGH:
-            GPIO.output(numGP,1)
-            sleep(1)
-            print("on")
-            GPIO.output(numGP,0)
-            sleep(1)
-            print("off")
+            for x in range(4):
+                 GPIO.output(numGP,1)
+                 sleep(1)
+                 print("on")
+                 GPIO.output(numGP,0)
+                 sleep(1)
+                 print("off")
         else:
-            GPIO.output(numGP,1)
+            GPIO.output(numGP,0)
         
