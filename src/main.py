@@ -1,6 +1,5 @@
 import moveFiles
 import runGPIO
-import blinkLights
 import os
 
 if __name__ == '__main__':
