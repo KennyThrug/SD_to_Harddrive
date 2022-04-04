@@ -20,17 +20,23 @@ from time import sleep
 
 lcd = None
 GPIO.setmode(GPIO.BCM)
+CurMessage = ""
 
 #sets up LCD screen
 def setupScreen():
+    global lcd
     lcd = CharLCD(numbering_mode=GPIO.BCM,cols=16,rows=2,pin_rs=13,pin_e=6,pins_data=[5,19,26,23,12,16,20,21],auto_linebreaks=True,backlight_enabled=True)
     
 #Writes a string to the LCD Screen
 def writeString(message):
     global lcd
+    global CurMessage
     if lcd == None:
         setupScreen()
-    lcd.write_string(message)
+    if not message == CurMessage:
+        CurMessage = message
+        lcd.clear()
+        lcd.write_string(message)
 
 #Sets up Button on specific GPIO port
 def setupButton(buttonGPIO):
