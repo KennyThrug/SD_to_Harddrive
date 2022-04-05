@@ -1,6 +1,9 @@
 import os
+from pickle import NONE
 import shutil
 from time import localtime, strftime
+
+from itsdangerous import exc
 
 def getAllFiles(path):
     listofFiles = []
@@ -14,9 +17,11 @@ def getFolderName(folderDir):
     return folderDir + curDate + "/" + curTime + "/"
 
 def moveFileBack(folderName):
+    if(folderName == NONE or folderName == ""):
+        return ""
     fol = len(folderName)
     back = folderName[::-1]
-    for x in folderName[1:]:
+    for x in back[1:]:
         if(fol == 0):
             return ""
         if(x == '/'):
@@ -27,11 +32,17 @@ def moveFileBack(folderName):
         
 
 def makeDir(folderName):
+    if(folderName == None):
+        return
+    print("Dir:" + folderName)
     try:
         os.mkdir(folderName)
     except:
         makeDir(moveFileBack(folderName))
-        os.mkdir(folderName)
+        try:
+            os.mkdir(folderName)
+        except:
+            print("Got to End of Line")
 
 def moveFiles(folderOne, folderTwo):
     folderDest = getFolderName(folderTwo)
@@ -42,7 +53,7 @@ def moveFiles(folderOne, folderTwo):
     for x in listOfFiles:
         print("")
         makeDir(moveFileBack(folderDest + x))
-
+        shutil.move(x,folderDest + x)
 
 #shutil.move('old/EmptyFile', 'new/test_file.txt')
 #print(getAllFiles("old/"))
