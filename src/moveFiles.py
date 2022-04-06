@@ -2,7 +2,7 @@ import os
 from pickle import NONE
 import shutil
 from time import localtime, strftime
-#import runGPIO
+import runGPIO
 
 #Takes a path, and gets every file in that folder, recursively.
 def getAllFiles(path):
@@ -59,18 +59,18 @@ def moveFiles(folderOne, folderTwo):
     listOfFiles = getAllFiles(folderOne)
     numFiles = len(listOfFiles)
     count = 0
-    print("-------0%-------" +
+    runGPIO.writeString("-------0%-------" +
     "\r\n--Don't Remove--")
     for x in listOfFiles:
         makeDir(moveFileBack(folderDest + x))
         shutil.move(folderOne + x,folderDest + x)
         count += 1
         perc = round((count / numFiles) * 100)
-        print("-------" + str(perc) + "%------" +
+        runGPIO.writeString("-------" + str(perc) + "%------" +
         "\r\n--Don't Remove--")
-    print("----Complete----\r\n--Don't Remove--")
+    runGPIO.writeString("----Complete----\r\n--Don't Remove--")
     if unmountDrive("hello"):
-        print("----Complete----\r\n-Safe to Remove-")
+        runGPIO.writeString("----Complete----\r\n-Safe to Remove-")
     else:
-        print("Error, Cannot\r\n Unmount Drive")
+        runGPIO.writeString("Error, Cannot\r\n Unmount Drive")
 moveFiles('old/','new/')
