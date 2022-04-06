@@ -2,11 +2,22 @@ import moveFiles
 import runGPIO
 import os
 
-if __name__ == '__main__':
+def runLoop():
+    buttonPressed = False #Quick boolean to make sure holding the button doesn't fuck things up because I know someone would do that :P
     runGPIO.setupButton(24)
-    moveFiles.moveFiles("hello","no")
-    #while True:
-    #    if runGPIO.checkForButton(24):
-    #        runGPIO.writeString("Secret Message\r\n---- ---->")
-    #    else:
-    #        runGPIO.writeString("Press The Button\r\nOr Don't")
+    while(True):
+        if runGPIO.checkForButton(24) and not buttonPressed:
+            print("Find Directory of files")
+            print("MoveAllFiles") #TODO have each file move a loading bar on the LED
+            buttonPressed = True
+        else:
+            buttonPressed = False
+
+if __name__ == '__main__':
+    runLoop()
+
+
+#------098%------
+#----Complete----
+#--Don't Remove--
+#-Safe to Remove-
