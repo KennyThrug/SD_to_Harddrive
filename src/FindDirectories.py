@@ -8,6 +8,13 @@ def getAllFiles(path):
             listofFiles.append((os.path.join(root,file))[len(path):])
     return listofFiles
 
+#Takes a path, and gets every file in that folder, but doesn't search farther than initial directory
+def getFirstFiles(path):
+    listofFiles = []
+    for item in os.listdir(path):
+        print(item)
+    return listofFiles
+
 def mountAllDevices():
     try:
         os.mkdir("dev1")
@@ -33,7 +40,7 @@ def unMountDevices():
     print("Todo")
 
 def checkForHardDrive(path):
-    list = getAllFiles(path)
+    list = getFirstFiles(path)
     for x in list:
         print(x)
         if x == "/.HD":
