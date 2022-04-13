@@ -9,8 +9,27 @@ def getAllFiles(path):
     return listofFiles
 
 def mountAllDevices():
-    print("Todo")
+    try:
+        os.mkdir("dev1")
+        os.mkdir("dev2")
+    except:
+        print("Todo")
+    try:
+        os.system("sudo mount /dev/sda1 dev1")
+        print("device1 successfully mounted")
+    except:
+        print("ERR: device1 not mounted")
 def unMountDevices():
+    try:
+        os.system("sudo umount dev1")
+        print("device successfully unmounted")
+    except:
+        print("ERR: device not unmounted")
+    try:
+        os.system("sudo unmount dev2")
+        print("device successfully unmounted")
+    except:
+        print("ERR: device2 not unmounted")
     print("Todo")
 
 def checkForHardDrive(path):
