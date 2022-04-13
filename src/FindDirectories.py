@@ -7,3 +7,6 @@ def getAllFiles(path):
         for file in files:
             listofFiles.append((os.path.join(root,file))[len(path):])
     return listofFiles
+
+def getBothPaths():
+    print("TODO")
