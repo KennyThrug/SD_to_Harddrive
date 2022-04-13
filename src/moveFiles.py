@@ -2,15 +2,10 @@ import os
 from pickle import NONE
 import shutil
 from time import localtime, strftime
+import runGPIO
+import FindDirectories
 
-from itsdangerous import exc
-
-def getAllFiles(path):
-    listofFiles = []
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            listofFiles.append(os.path.join(root,file))
-    return listofFiles
+#Generates a folder name based off the current time and date
 def getFolderName(folderDir):
     curDate = strftime("%Y-%m-%d", localtime())
     curTime = strftime("%H-%M-%S",localtime())
@@ -47,9 +42,11 @@ def makeDir(folderName):
 def moveFiles(folderOne, folderTwo):
     folderDest = getFolderName(folderTwo)
     makeDir(folderDest)
-    listOfFiles = getAllFiles(folderOne)
-    print(folderDest)
-    print(listOfFiles)
+    listOfFiles = FindDirectories.getAllFiles(folderOne)
+    numFiles = len(listOfFiles)
+    count = 0
+    runGPIO.writeString("-------0%-------" +
+    "\r\n--Don't Remove--")
     for x in listOfFiles:
         print("")
         makeDir(moveFileBack(folderDest + x))
