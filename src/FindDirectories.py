@@ -10,10 +10,7 @@ def getAllFiles(path):
 
 #Takes a path, and gets every file in that folder, but doesn't search farther than initial directory
 def getFirstFiles(path):
-    listofFiles = []
-    for item in os.listdir(path):
-        print(item)
-    return listofFiles
+    return os.listdir(path)
 
 def mountAllDevices():
     try:
@@ -26,6 +23,11 @@ def mountAllDevices():
         print("device1 successfully mounted")
     except:
         print("ERR: device1 not mounted")
+    try:
+        os.system("sudo mount /dev/sdc1 dev2")
+        print("device2 successfully mounted")
+    except:
+        print("ERR: device2 not mounted")
 def unMountDevices():
     try:
         os.system("sudo umount dev1")
@@ -33,7 +35,7 @@ def unMountDevices():
     except:
         print("ERR: device not unmounted")
     try:
-        os.system("sudo unmount dev2")
+        os.system("sudo umount dev2")
         print("device successfully unmounted")
     except:
         print("ERR: device2 not unmounted")
@@ -42,8 +44,7 @@ def unMountDevices():
 def checkForHardDrive(path):
     list = getFirstFiles(path)
     for x in list:
-        print(x)
-        if x == "/.HD":
+        if x == '.HD':
             print("found")
             return True
     return False
@@ -64,8 +65,10 @@ def getBothPaths():
     else:
         if(dev1):
             print("dev1 has HD")
+            return "dev1", "dev2"
         else:
             print("dev2 has HD")
+            return "dev2", "dev1"
         print("Do moving operation")
     unMountDevices()
 
