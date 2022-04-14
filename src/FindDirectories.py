@@ -72,5 +72,5 @@ def getBothPaths():
             return 2
     return 0
 
-if(__name__ == "__main__"):
-    getBothPaths()
+#if(__name__ == "__main__"):
+#    getBothPaths()

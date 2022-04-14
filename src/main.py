@@ -12,11 +12,13 @@ def runLoop():
             path = FindDirectories.getBothPaths()
             sleep(1)
             if(path == 1):
-                moveFiles("dev2","dev1/Pictures")
+                moveFiles.moveFiles("dev2","dev1/Pictures/")
             elif(path == "dev2"):
-                moveFiles("dev1","dev2/Pictures")
+                moveFiles.moveFiles("dev1","dev2/Pictures/")
             else:
                 return
+            FindDirectories.unMountDevices()
+            runGPIO.writeString("----Complete----\r\n-Safe to Remove-")
             #print("MoveAllFiles") #TODO have each file move a loading bar on the LED
         else:
             if not runGPIO.checkForButton(24):
