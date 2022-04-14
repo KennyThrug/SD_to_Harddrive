@@ -66,4 +66,4 @@ def moveFiles(folderOne, folderTwo):
         runGPIO.writeString("----Complete----\r\n-Safe to Remove-")
     else:
         runGPIO.writeString("Error, Cannot\r\n Unmount Drive")
-moveFiles('old/','new/')
+#moveFiles('old/','new/')
