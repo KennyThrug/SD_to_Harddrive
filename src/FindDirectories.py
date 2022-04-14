@@ -1,4 +1,5 @@
 import os
+import runGPIO
 
 #Takes a path, and gets every file in that folder, recursively.
 def getAllFiles(path):
@@ -17,35 +18,35 @@ def mountAllDevices():
         os.mkdir("dev1")
         os.mkdir("dev2")
     except:
-        print("Todo")
+        runGPIO.writeString("Todo")
     try:
         os.system("sudo mount /dev/sda1 dev1")
-        print("device1 successfully mounted")
+        runGPIO.writeString("device1 success\r\n mounted")
     except:
-        print("ERR: device1 not mounted")
+        runGPIO.writeString("ERR: device1\r\n not mounted")
     try:
         os.system("sudo mount /dev/sdc1 dev2")
-        print("device2 successfully mounted")
+        runGPIO.writeString("device2 success\r\n mounted")
     except:
-        print("ERR: device2 not mounted")
+        runGPIO.writeString("ERR: device2\r\n not mounted")
 def unMountDevices():
     try:
         os.system("sudo umount dev1")
-        print("device successfully unmounted")
+        runGPIO.writeString("device success\r\n unmounted")
     except:
-        print("ERR: device not unmounted")
+        runGPIO.writeString("ERR: device not unmounted")
     try:
         os.system("sudo umount dev2")
-        print("device successfully unmounted")
+        runGPIO.writeString("device success\r\n unmounted")
     except:
-        print("ERR: device2 not unmounted")
-    print("Todo")
+        runGPIO.writeString("ERR: device2\r\n not unmounted")
+    runGPIO.writeString("Todo")
 
 def checkForHardDrive(path):
     list = getFirstFiles(path)
     for x in list:
         if x == '.HD':
-            print("found")
+            runGPIO.writeString("found")
             return True
     return False
 
@@ -59,18 +60,17 @@ def getBothPaths():
     dev2 =  checkForHardDrive("dev2")
     if(dev1 == dev2):
         if(dev1):
-            print("ERR: Both dev's\r\nhave .HD file")
+            runGPIO.writeString("ERR: Both dev's\r\nhave .HD file")
         else:
-            print("ERR: No dev's\r\nhave .HD file")
+            runGPIO.writeString("ERR: No dev's\r\nhave .HD file")
     else:
         if(dev1):
-            print("dev1 has HD")
-            return "dev1", "dev2"
+            runGPIO.writeString("dev1 has HD")
+            return 1
         else:
-            print("dev2 has HD")
-            return "dev2", "dev1"
-        print("Do moving operation")
-    unMountDevices()
+            runGPIO.writeString("dev2 has HD")
+            return 2
+    return 0
 
 if(__name__ == "__main__"):
     getBothPaths()

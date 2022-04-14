@@ -1,5 +1,6 @@
 import moveFiles
 import runGPIO
+import FindDirectories
 import os
 from time import sleep
 def runLoop():
@@ -8,9 +9,15 @@ def runLoop():
     while(True):
         if (buttonPressed == False and runGPIO.checkForButton(24)):
             buttonPressed = True
-            print("Find Directory of files")
+            path = FindDirectories.getBothPaths()
             sleep(1)
-            print("MoveAllFiles") #TODO have each file move a loading bar on the LED
+            if(path == 1):
+                moveFiles("dev2","dev1/Pictures")
+            elif(path == "dev2"):
+                moveFiles("dev1","dev2/Pictures")
+            else:
+                return
+            #print("MoveAllFiles") #TODO have each file move a loading bar on the LED
         else:
             if not runGPIO.checkForButton(24):
                 buttonPressed = False
