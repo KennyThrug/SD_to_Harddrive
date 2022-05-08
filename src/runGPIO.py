@@ -1,16 +1,19 @@
+#Change the Following Values if you wish to change the GPIO Ports used
+
 # Ground
 # 5v
 # Backlight (resistor into Ground)
-# Register Select: GPIO 13
-# Enable: GPIO 6
-# Data 0: GPIO 5 
-# Data 1: GPIO 19
-# Data 2: GPIO 26
-# Data 3: GPIO 23
-# Data 4: GPIO 12
-# Data 5: GPIO 16
-# Data 6: GPIO 20
-# Data 7: GPIO 21
+RegSelect = 13
+# Read/Write : Ground
+Enable = 6
+Data0 = 5 
+Data1 = 19
+Data2 = 26
+Data3 = 23
+Data4 = 12
+Data5 = 16
+Data6 = 20
+Data7 = 21
 # Backlight Anode (resister into 5v)
 # Backlight Cathode (Ground)
 
@@ -38,8 +41,9 @@ def outputFinalMessage():
 
 #sets up LCD screen
 def setupScreen():
+    global Enable,RegSelect,Data0,Data1,Data2,Data3,Data4,Data5,Data6,Data7
     global lcd
-    lcd = CharLCD(numbering_mode=GPIO.BCM,cols=16,rows=2,pin_rs=13,pin_e=6,pins_data=[5,19,26,23,12,16,20,21],auto_linebreaks=True,backlight_enabled=True)
+    lcd = CharLCD(numbering_mode=GPIO.BCM,cols=16,rows=2,pin_rs=13,pin_e=Enable,pins_data=[Data0,Data1,Data2,Data3,Data4,Data5,Data6,Data7],auto_linebreaks=True,backlight_enabled=True)
     
 #Writes a string to the LCD Screen
 def writeString(message):
