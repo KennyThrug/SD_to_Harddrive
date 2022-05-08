@@ -13,22 +13,36 @@ def getAllFiles(path):
 def getFirstFiles(path):
     return os.listdir(path)
 
+listOfDevices = "abcdefghijklmnopqrstuvwxyz"
+
 def mountAllDevices():
     try:
         os.mkdir("dev1")
         os.mkdir("dev2")
     except:
         runGPIO.writeString("Todo")
-    try:
-        os.system("sudo mount /dev/sda1 dev1")
-        runGPIO.writeString("device1 success\r\n mounted")
-    except:
-        runGPIO.writeString("ERR: device1\r\n not mounted")
-    try:
-        os.system("sudo mount /dev/sdc1 dev2")
-        runGPIO.writeString("device2 success\r\n mounted")
-    except:
-        runGPIO.writeString("ERR: device2\r\n not mounted")
+    isDone = False
+    isHalf = False
+    for i in listOfDevices:
+        if isHalf == False:
+            try:
+                subprocess.run(["sudo mount /dev/sd" + i + "1 dev1"],check = True)
+                runGPIO.writeString("device1 success\r\n mounted")
+                isHalf = True
+                print("Succ1")
+            except:
+                print("Err1")
+                runGPIO.writeString("ERR: device1\r\n not mounted")
+        if isHalf == True and isDone == False:
+            print(i)
+            try:
+                os.system("sudo mount /dev/sd" + i + "1 dev2")
+                runGPIO.writeString("device2 success\r\n mounted")
+                isDone = True
+                print("Succ2")
+            except:
+                runGPIO.writeString("ERR: device2\r\n not mounted")
+                print("Err2")
 def unMountDevices():
     try:
         os.system("sudo umount dev1")
