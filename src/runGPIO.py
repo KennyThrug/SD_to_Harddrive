@@ -21,6 +21,20 @@ from time import sleep
 lcd = None
 GPIO.setmode(GPIO.BCM)
 CurMessage = ""
+finalMessage = ""
+
+def resetFinalMessage():
+    global finalMessage
+    finalMessage = ""
+
+def setFinalMessage(strin):
+    global finalMessage
+    if finalMessage == "":
+        finalMessage = strin
+
+def outputFinalMessage():
+    global finalMessage
+    writeString(finalMessage)
 
 #sets up LCD screen
 def setupScreen():

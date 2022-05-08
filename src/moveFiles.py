@@ -9,7 +9,7 @@ import FindDirectories
 def getFolderName(folderDir):
     curDate = strftime("%Y-%m-%d", localtime())
     curTime = strftime("%H-%M-%S",localtime())
-    return folderDir + curDate + "/" + curTime + "/"
+    return folderDir + curDate + "/" + curTime #+ "/"
 
 #Essentially, takes a file or folder name, and moves it back one directory. Essentially the same thing as doing cd .. in a bash terminal
 def moveFileBack(folderName):
