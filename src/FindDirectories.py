@@ -24,25 +24,13 @@ def mountAllDevices():
     isDone = False
     isHalf = False
     for i in listOfDevices:
-        if isHalf == False:
-            try:
-                subprocess.run(["sudo mount /dev/sd" + i + "1 dev1"],check = True)
-                runGPIO.writeString("device1 success\r\n mounted")
+        if(isHalf == False):
+            if(os.system("sudo mount /dev/sd" + i + "1 dev1") == ""):
                 isHalf = True
-                print("Succ1")
-            except:
-                print("Err1")
-                runGPIO.writeString("ERR: device1\r\n not mounted")
-        if isHalf == True and isDone == False:
-            print(i)
-            try:
-                os.system("sudo mount /dev/sd" + i + "1 dev2")
-                runGPIO.writeString("device2 success\r\n mounted")
+        elif(isDone == False):
+            if(os.system("sudo mount /dev/sd" + i + "1 dev2") == ""):
                 isDone = True
-                print("Succ2")
-            except:
-                runGPIO.writeString("ERR: device2\r\n not mounted")
-                print("Err2")
+                break
 def unMountDevices():
     try:
         os.system("sudo umount dev1")
